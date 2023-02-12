@@ -6,31 +6,33 @@ from .models import Brand, Category, Product, ProductDetails
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(source="name")
+
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = [
+            "category_name",
+        ]
 
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = "__all__"
-
-
-class ProductSerializer(serializers.ModelSerializer):
-
-    # this links the brand and category to the product
-    brand = BrandSerializer()
-    category = CategorySerializer()
-
-    class Meta:
-        model = Product
-        fields = "__all__"
+        exclude = ("id",)
 
 
 class ProductDetailsSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
-
     class Meta:
         model = ProductDetails
-        fields = "__all__"
+        exclude = ("id", "is_active", "product")
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    # this links the brand and category to the product
+    brand_name = serializers.CharField(source="brand.name")
+    category_name = serializers.CharField(source="category.name")
+    product_details = ProductDetailsSerializer(many=True)
+
+    class Meta:
+        model = Product
+        fields = ("name", "slug", "description", "brand_name", "category_name", "product_details")

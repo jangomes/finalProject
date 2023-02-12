@@ -1,8 +1,8 @@
-from pytest_factoryboy import register
 import pytest
-from .factories import CategoryFactory, BrandFactory, ProductFactory
+from pytest_factoryboy import register
 from rest_framework.test import APIClient
 
+from .factories import BrandFactory, CategoryFactory, ProductFactory
 
 register(CategoryFactory)
 register(BrandFactory)

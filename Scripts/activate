@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\jan_n\OneDrive\Documents\GitHub\finalProject"
+VIRTUAL_ENV="C:\Users\jan_n\Dev\finalProject"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
